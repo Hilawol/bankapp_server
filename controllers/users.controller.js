@@ -9,18 +9,6 @@ const getAllUsers = async (req, res) => {
   }
 }
 
-const addUser = async (req, res) => {
-  const { id } = req.body;
-  const user = new userModel({
-    id: id
-  });
-  try {
-    const result = await user.save();
-    return res.status(201).json({ "success": result });
-  } catch (error) {
-    return res.status(500).json({ "error": error })
-  }
-}
 
 //Gets user by identificatioh number (not the _id object)
 const getUser = async (req, res) => {
@@ -33,6 +21,19 @@ const getUser = async (req, res) => {
     return res.send(user);
   } catch (error) {
     return res.status(500).json({ "error": error });
+  }
+}
+
+const addUser = async (req, res) => {
+  const { id } = req.body;
+  const user = new userModel({
+    id: id
+  });
+  try {
+    const result = await user.save();
+    return res.status(201).json({ "success": result });
+  } catch (error) {
+    return res.status(500).json({ "error": error })
   }
 }
 

@@ -30,6 +30,7 @@ const createAccount = async (req, res) => {
     if (!user) {
       return res.status(404).send();
     }
+
     const account = new accountModel(
       {
         userId: user.id,
@@ -37,6 +38,8 @@ const createAccount = async (req, res) => {
         balance: 0
       }
     )
+    console.log("userid:", user._id);
+    console.log(account);
     const result = await account.save();
     return res.status(201).send(result);
 
