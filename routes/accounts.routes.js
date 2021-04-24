@@ -8,6 +8,8 @@ router.get('/', (req, res) => {
   accountController.getUserAccounts(req, res);
 }).post('/user/:id', (req, res) => {
   accountController.createAccount(req, res);
-})
+}).put('/user/:id', (req, res) => {
+  accountController.setCredit(req, res);
+});
 
 module.exports = router;

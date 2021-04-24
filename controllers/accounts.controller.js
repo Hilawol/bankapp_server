@@ -48,8 +48,28 @@ const createAccount = async (req, res) => {
   }
 }
 
+const setCredit = async (req, res) => {
+  const { credit } = req.body;
+  const { id } = req.params;
+  if (credit < 0) {
+    return res.status(400).json({ "error": "Credit must be a positive number" });
+  }
+  try {
+    const account = await accountModel.findByIdAndUpdate({ _id: id }, { credit: credit });
+    console.log(account);
+    if (!account) {
+      return res.status(404).send();
+    }
+    res.json(account);
+  }
+  catch (error) {
+    return res.status(500).json({ "error": error });
+  }
+}
+
 module.exports = {
   getAccounts,
   getUserAccounts,
-  createAccount
+  createAccount,
+  setCredit
 }
